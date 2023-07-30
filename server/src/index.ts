@@ -31,6 +31,15 @@ app.post('/decks', async (req: Request, res: Response) => {
     res.json(createdDeck)
 })
 
+// Delete a deck based on deck id
+app.delete('/decks/:deckId', async (req: Request, res: Response) => {
+    const deckId = req.params.deckId
+    const deck = await DeckModel.findByIdAndDelete(deckId)
+    res.json({
+        message: "Successfully deleted"
+    })
+})
+
 connect(process.env.MONGO_URL ?? "")
 .then(() => {
     console.log(`Listening to PORT ${PORT}`)
