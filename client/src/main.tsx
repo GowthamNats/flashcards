@@ -5,7 +5,6 @@ import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
-  Route
 } from "react-router-dom"
 import Deck from './components/Deck.tsx'
 
