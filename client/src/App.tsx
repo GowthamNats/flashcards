@@ -28,26 +28,47 @@ function App() {
   }, [])
 
   return (
-    <>
-      <ul>
-          {decks.map((deck) => (
-            <li key={deck._id}>
-              <button onClick={() => handleDeleteDeck(deck._id)}>X</button>  
-              <Link to={`decks/${deck._id}`}>{deck.title}</Link>
-            </li>
-          ))}
-      </ul>
-      <form onSubmit={handleCreateDeck}>
-        <label htmlFor="deck-title">Deck Title</label>
-        <input 
-          id="deck-title" 
-          type="text" 
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-          required
-        />
-        <button>Create Deck</button>
+    <div className="main-container">
+
+      <form onSubmit={handleCreateDeck} className="form-container">
+        <h1 className="main-text">Flash Card Deck</h1>
+        <div className="flex">
+          <input
+            id="deck-title"
+            type="text"
+            placeholder="Enter Deck Title"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+            value={title}
+            required
+          />
+          <button
+            type="submit"
+            className="deck-button"
+          >
+            Create Deck
+          </button>
+        </div>
       </form>
-    </>
+
+      <div className="card-container">
+        {decks.map((deck) => (
+          <div key={deck._id} className="card">
+            <button
+              onClick={() => handleDeleteDeck(deck._id)}
+              className="card-delete"
+            >
+              X
+            </button>
+            <Link
+              to={`decks/${deck._id}`}
+              className="card-text"
+            >
+              {deck.title}
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 

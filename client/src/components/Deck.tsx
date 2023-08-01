@@ -34,25 +34,48 @@ export default function Deck() {
   }, [deckId])
 
   return (
-    <>
-      <ul>
-          {cards.map((card, index) => (
-            <li key={index}>
-              <button onClick={() => handleDeleteCard(index)}>X</button>  
-              {card}
-            </li>
-          ))}
-      </ul>
-      <form onSubmit={handleCreateCard}>
-        <label htmlFor="card-title">Card Text</label>
-        <input 
-          id="card-title" 
-          type="text" 
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
-          required
-        />
-        <button>Create Card</button>
+    <div className="main-container">
+
+      <form onSubmit={handleCreateCard} className="form-container">
+        <h1 className="main-text">Flash Cards</h1>
+        <div className="flex">
+          <input
+            id="deck-title"
+            type="text"
+            placeholder="Enter Confession"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            value={text}
+            required
+          />
+          <button
+            type="submit"
+            className="deck-button"
+          >
+            Create a Flash Card
+          </button>
+        </div>
       </form>
-    </>
+      <div className="flex items-center justify-center my-3">
+        <Link to={"/"} className="deck-button">Back to the Array</Link>
+      </div>
+
+      <div className="card-container">
+        {cards.map((card, index) => (
+          <div key={index} className="card">
+            <button
+              onClick={() => handleDeleteCard(index)}
+              className="card-delete"
+            >
+              X
+            </button>
+            <h1
+              className="card-text"
+            >
+              {card}
+            </h1>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
